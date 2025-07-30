@@ -3,7 +3,11 @@ import {
   createBrowserRouter,
 } from "react-router-dom";
 import MainLayout from "../components/MainLayout";
-import Home from "../components/Home/Home";
+import Home from "../components/pages/Home/Home";
+import LogIn from "../components/LogIn";
+import SignUp from "../components/SignUp";
+import PrivetRoute from "./PrivetRoute";
+import TaskDetails from "../components/pages/Details/TaskDetails";
 
 
 const router = createBrowserRouter([
@@ -14,9 +18,23 @@ const router = createBrowserRouter([
         {
             path: '/',
             element: <Home></Home>
+        },
+        {
+          path: '/details/:id',
+          element: <TaskDetails></TaskDetails>,
+          loader: ({params}) => fetch(`${import.meta.env.VITE_baseAPI}/task/${params.id}`)
+
         }
     ]
   },
+  {
+    path: '/login',
+    element: <LogIn></LogIn>
+  },
+  {
+    path: '/signup',
+    element: <SignUp></SignUp>
+  }
 ]);
 
 export default router
