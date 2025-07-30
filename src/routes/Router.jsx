@@ -8,12 +8,14 @@ import LogIn from "../components/LogIn";
 import SignUp from "../components/SignUp";
 import PrivetRoute from "./PrivetRoute";
 import TaskDetails from "../components/pages/Details/TaskDetails";
+import Error from "../components/shared/Error";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error>,
     children: [
         {
             path: '/',
@@ -22,7 +24,7 @@ const router = createBrowserRouter([
         {
           path: '/details/:id',
           element: <TaskDetails></TaskDetails>,
-          loader: ({params}) => fetch(`${import.meta.env.VITE_baseAPI}/task/${params.id}`)
+          loader: ({params}) => fetch(`${import.meta.env.VITE_baseAPI}/task/details/${params.id}`)
 
         }
     ]
